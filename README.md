@@ -1,6 +1,6 @@
 ## Personal Todo API
 
-A secure RESTful Backend API build with GO(1.25.5) and Gin, implements JWT authentication and in-memory data management. In-memory could .be changed with db implementation later.
+A secure RESTful Backend API build with GO(1.25.5) and Gin, implements JWT authentication and in-memory data management. In-memory could be changed with db implementation later.
 
 ## Packages
 
