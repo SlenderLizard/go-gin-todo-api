@@ -18,7 +18,7 @@ Example:
 PORT=3000
 JWT_SECRET=your_super_secret_key
 ```
-4. Install dependencies
+3. Install dependencies
 ```
 go mod tidy
 ```
