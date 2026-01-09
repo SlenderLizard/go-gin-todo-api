@@ -1,46 +1,53 @@
-Personal Todo API
+## Personal Todo API
 
 A secure RESTful Backend API build with GO(1.25.5) and Gin, implements JWT authentication and in-memory data management. In-memory could .be changed with db implementation later.
 
-Packages
+## Packages
 
-Gin Gonic (https://gin-gonic.com/): Routing and middleware.  
-JWT (v5) (https://pkg.go.dev/github.com/golang-jwt/jwt/v5):  Secure user authorization with expiration claims.  
-Bcryipt (https://pkg.go.dev/golang.org/x/crypto/bcrypt): Secure password hashing.   
-Godotenv (https://github.com/joho/godotenv): Configuration via enviroment variables.  
-Concurrency: sync.RWMutex for thread safe in-memory storage.  
+* **Gin Gonic** ([gin-gonic.com](https://gin-gonic.com/)): Routing and middleware.
+* **JWT (v5)** ([golang-jwt/jwt](https://github.com/golang-jwt/jwt/v5)): Secure user authorization with expiration claims.
+* **Bcrypt** ([golang.org/x/crypto/bcrypt](https://pkg.go.dev/golang.org/x/crypto/bcrypt)): Secure password hashing.
+* **Godotenv** ([joho/godotenv](https://github.com/joho/godotenv)): Configuration via environment variables.
+* **Concurrency**: `sync.RWMutex` for thread-safe in-memory storage.
 
-Installation
+## Installation
 1. Clone the repository
-2. Create a .env file in the root directory
-Example:
-`PORT=3000
-JWT_SECRET=your_super_secret_key`
-3. Install dependencies
-`go mod tidy`
-
-Running the App  
+2. Create a .env file in the root directory  
+Example:  
+```
+PORT=3000
+JWT_SECRET=your_super_secret_key
+```
+4. Install dependencies
+```
+go mod tidy
+```
+### Running the App  
 Execute the following command in the root folder:
 go run main.go
 
-API Endpoints
+## API Endpoints
 
-Public Routes
-POST /register: Creates a new user, username must be unique.
-POST /login:  Authenticate and recieve a JWT token.
-Protected Routes (Requires Authorization: Bearer <token>)
-GET /todos: List authenticated users todos.
-GET /todos/:id; Get a specific todo
-POST /todos: Create a new todo.
-PUT /todos/:id; Update a todo.
-DELETE /todos/:id; Remove a specific todo item. 
+### Public Routes
+* **POST** `/register`: Creates a new user. Username must be unique.
+* **POST** `/login`: Authenticate and receive a JWT token.
 
-Project Structure 
-/handlers: HTTP request logic and status code management. 
-/repository: In-memory storage with mutex implementation.
-/middleware: JWT authenticaion and ownership validation.
-/models: Structs for User and Todo
-/initializers: Setup for .env variables
-/postman_collections: Configured JSON files for API testing.
+### Protected Routes
+*Requires Header:* `Authorization: Bearer <your_token>`
+
+* **GET** `/todos`: List authenticated user's todos.
+* **GET** `/todos/:id`: Get a specific todo item.
+* **POST** `/todos`: Create a new todo and link it to the authenticated user.
+* **PUT** `/todos/:id`: Update a specific todo (Title, Description, or Completion status).
+* **DELETE** `/todos/:id`: Remove a specific todo item.
+
+## Project Structure
+
+* **/handlers**: HTTP request logic and correct HTTP status code management.
+* **/repository**: In-memory storage with `sync.RWMutex` for concurrency safety.
+* **/middleware**: JWT authentication and todo ownership validation.
+* **/models**: Data structures (structs) for User and Todo entities.
+* **/initializers**: Environment variables (.env) and initial configuration setup.
+* **/postman_collections**: Pre-configured JSON files for easy API testing.
 
 Tried to automate the postman, but failed. Token needs to be pasted manually.
